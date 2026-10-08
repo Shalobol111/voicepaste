@@ -1,0 +1,2 @@
+@AGENTS.md
+@TRANSLATOR.md

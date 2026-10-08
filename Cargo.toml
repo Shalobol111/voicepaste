@@ -1,0 +1,40 @@
+[package]
+name = "voicepaste"
+version = "1.0.0"
+edition = "2021"
+description = "Local voice-to-text for Windows: press a hotkey, speak, the text is pasted"
+license = "MIT"
+readme = "README.md"
+
+[features]
+# Development default: console build (logs on screen) with CUDA.
+default = ["console", "cuda"]
+# Without it the exe is a tray-only GUI app (`--no-default-features`).
+console = []
+# NVIDIA GPU acceleration. Without it Whisper runs on the CPU and the exe starts on
+# PCs that have no NVIDIA driver (the CUDA build links nvcuda.dll and would not).
+cuda = ["whisper-rs/cuda"]
+
+[dependencies]
+anyhow = "1.0.104"
+arboard = "3.6.1"
+cpal = "0.18.2"
+crossbeam-channel = "0.5.17"
+directories = "6.0.0"
+eframe = { version = "0.36.2", default-features = false, features = ["glow", "default_fonts"] }
+global-hotkey = "0.8.0"
+notify = "8.2.0"
+rubato = "5.0.1"
+serde = { version = "1.0.229", features = ["derive"] }
+toml = "1.1.6"
+tracing = "0.1.44"
+tracing-appender = "0.2.5"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+tray-icon = "0.26.0"
+ureq = "3.4.2"
+whisper-rs = { version = "0.16.0", features = ["tracing_backend"] }
+windows = { version = "0.62.2", features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_Media_Audio", "Win32_System_Console", "Win32_System_LibraryLoader", "Win32_System_Registry", "Win32_System_Threading", "Win32_UI_HiDpi", "Win32_UI_Input_KeyboardAndMouse", "Win32_UI_WindowsAndMessaging"] }
+winit = "0.30.13"
+
+[build-dependencies]
+winresource = "0.1.31"
